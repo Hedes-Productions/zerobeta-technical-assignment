@@ -15,6 +15,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue()
+    @Column(name="user_id")
     private Long id;
     @NonNull
     private String email;
@@ -24,6 +25,7 @@ public class User {
     private String firstName;
     @NonNull
     private String lastName;
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "f_user_id", referencedColumnName = "user_id")
     private Set<Order> orders;
 }

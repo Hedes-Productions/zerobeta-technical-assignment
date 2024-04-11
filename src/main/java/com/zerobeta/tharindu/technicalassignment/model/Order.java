@@ -17,6 +17,7 @@ import java.util.UUID;
 public class Order {
     @Id
     @Builder.Default
+    @Column(name="order_id")
     private UUID id=UUID.randomUUID() ;
     @NonNull
     private String item_name;
@@ -24,8 +25,8 @@ public class Order {
     private Integer quantity;
     @NonNull
     private String address;
-    @NonNull
-    private String status;
+    @Builder.Default
+    private String status="NEW";
     @Builder.Default
     private LocalDateTime placementTimestamp=LocalDateTime.now();
 }
