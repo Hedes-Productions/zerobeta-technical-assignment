@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .securityMatcher("/**")
                 .authorizeHttpRequests(registry->registry
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/auth/signup").permitAll()
                         .anyRequest().authenticated())
                 .userDetailsService(userDetailsService)
                 .httpBasic(Customizer.withDefaults());
