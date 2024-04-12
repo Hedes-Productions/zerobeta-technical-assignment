@@ -13,7 +13,7 @@ public class JwtIssuer {
     public String issue(Long userId, String email){
         return JWT.create()
                 .withSubject(String.valueOf(userId))
-                .withClaim("email",String.valueOf(email))
+                .withClaim("email",email)
                 .withExpiresAt(Instant.now().plus(Duration.of(1, ChronoUnit.DAYS)))
                 .sign(Algorithm.HMAC256("secret"));
     }
