@@ -9,7 +9,7 @@ public class JwtToSecurityUserConverter {
     public SecurityUser convert(DecodedJWT decodedJWT){
         return SecurityUser.builder()
                 .userId(Long.valueOf(decodedJWT.getSubject()))
-                .email(String.valueOf(decodedJWT.getClaim("email")))
+                .email(decodedJWT.getClaim("email").asString())
                 .build();
     }
 }
