@@ -17,16 +17,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
     public final AuthService authService;
     public final JwtIssuer jwtIssuer;
     public final AuthenticationManager authenticationManager;
-    @GetMapping
-    public String home(){
-        return "Welcome to order management system";
-    }
-
     @PostMapping("/signup")
     public ResponseEntity<SignUpResponse> signup(@RequestBody SignUpRequest signUpRequest){
         User user = authService.signUp(signUpRequest);
