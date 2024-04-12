@@ -1,6 +1,6 @@
 package com.zerobeta.tharindu.technicalassignment.service;
 
-import com.zerobeta.tharindu.technicalassignment.dto.SignupRequest;
+import com.zerobeta.tharindu.technicalassignment.dto.SignUpRequest;
 import com.zerobeta.tharindu.technicalassignment.model.User;
 import com.zerobeta.tharindu.technicalassignment.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    public User signUp(SignupRequest signupRequest){
+    public User signUp(SignUpRequest signupRequest){
         return userRepository.save(
                 User.builder()
                         .email(signupRequest.getEmail())
