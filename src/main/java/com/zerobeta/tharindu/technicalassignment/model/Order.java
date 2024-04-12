@@ -25,8 +25,10 @@ public class Order {
     private Integer quantity;
     @NonNull
     private String address;
+    @Setter
     @Builder.Default
     private String status="NEW";
     @Builder.Default
     private LocalDateTime placementTimestamp=LocalDateTime.now();
+
 }

@@ -1,5 +1,7 @@
 package com.zerobeta.tharindu.technicalassignment.controller;
 
+import com.zerobeta.tharindu.technicalassignment.dto.OrderCancellationRequest;
+import com.zerobeta.tharindu.technicalassignment.dto.OrderCancellationResponse;
 import com.zerobeta.tharindu.technicalassignment.dto.OrderPlacementRequest;
 import com.zerobeta.tharindu.technicalassignment.dto.OrderPlacementResponse;
 import com.zerobeta.tharindu.technicalassignment.model.SecurityUser;
@@ -20,5 +22,12 @@ public class OrderController {
         return ResponseEntity.ok(OrderPlacementResponse.builder()
                         .orderId(orderService.placeOrder(orderPlacementRequest, securityUser.getEmail()))
                         .build());
+    }
+
+    @PostMapping("/cancelorder")
+    public ResponseEntity<OrderCancellationResponse> cancelOrder(@RequestBody OrderCancellationRequest orderPlacementRequest){
+        return ResponseEntity.ok(OrderCancellationResponse.builder()
+                .cancelMessage(orderService.cancelOrder(orderPlacementRequest))
+                .build());
     }
 }
