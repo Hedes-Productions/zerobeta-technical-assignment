@@ -3,9 +3,7 @@ package com.zerobeta.tharindu.technicalassignment.dto;
 import lombok.Getter;
 
 @Getter
-public class SignUpRequest {
+public class SignInRequest {
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
 }
