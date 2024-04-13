@@ -19,11 +19,8 @@ public class Order {
     @Builder.Default
     @Column(name="order_id")
     private UUID id=UUID.randomUUID() ;
-    @NonNull
     private String item_name;
-    @NonNull
     private Integer quantity;
-    @NonNull
     private String address;
     @Setter
     @Builder.Default
