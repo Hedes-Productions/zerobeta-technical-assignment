@@ -1,5 +1,6 @@
 package com.zerobeta.tharindu.technicalassignment.service;
 
+import com.zerobeta.tharindu.technicalassignment.Enum.OrderStates;
 import com.zerobeta.tharindu.technicalassignment.dto.OrderCancellationRequest;
 import com.zerobeta.tharindu.technicalassignment.dto.OrderPlacementRequest;
 import com.zerobeta.tharindu.technicalassignment.model.Order;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.UUID;
@@ -39,20 +41,21 @@ public class OrderService {
 
     public String cancelOrder(@NonNull OrderCancellationRequest orderCancellationRequest) throws NoSuchElementException{
         Order order = orderRepository.findById(orderCancellationRequest.getOrderId()).orElseThrow(()->new NoSuchElementException("Order not found"));
-        if (Objects.equals(order.getStatus(), "NEW")){
-            order.setStatus("CANCELLED");
+        if (Objects.equals(order.getStatus(), OrderStates.NEW)){
+            order.setStatus(OrderStates.CANCELLED);
             orderRepository.save(order);
             return "Order successfully canceled";
 
-        } else if (Objects.equals(order.getStatus(), "CANCELLED")) {
+        } else if (Objects.equals(order.getStatus(), OrderStates.CANCELLED)) {
             return "Unable to cancel the oder. Order canceled already";
         }else{
             return "Unable to cancel the oder. Order dispatched already";
         }
     }
 
-    public Page<Order> getHistory(int page, int size) {
+    public List<Order> getHistory(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        return orderRepository.findAll(pageRequest);
+        Page<Order> orderPage = orderRepository.findAll(pageRequest);
+        return orderPage.getContent();
     }
 }

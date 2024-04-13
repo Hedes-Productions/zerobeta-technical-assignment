@@ -1,5 +1,6 @@
 package com.zerobeta.tharindu.technicalassignment.job;
 
+import com.zerobeta.tharindu.technicalassignment.Enum.OrderStates;
 import com.zerobeta.tharindu.technicalassignment.model.Order;
 import com.zerobeta.tharindu.technicalassignment.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +21,9 @@ public class OrderDispatchJob {
     @Scheduled(fixedRate = 1000*30)
     public void dispatchOrders() {
         logger.info("Running scheduled task...");
-        List<Order> newOrders = orderRepository.findAllByStatus("NEW").orElseThrow(()->new NoSuchElementException("No new orders"));
+        List<Order> newOrders = orderRepository.findAllByStatus(OrderStates.NEW).orElseThrow(()->new NoSuchElementException("No new orders"));
         for (Order order: newOrders){
-            order.setStatus("DISPATCHED");
+            order.setStatus(OrderStates.DISPATCHED);
         }
         orderRepository.saveAll(newOrders);
         logger.info("Dispatch job was executed.");

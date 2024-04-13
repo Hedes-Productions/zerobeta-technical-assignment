@@ -1,6 +1,7 @@
 package com.zerobeta.tharindu.technicalassignment.model;
 
 
+import com.zerobeta.tharindu.technicalassignment.Enum.OrderStates;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,7 +25,7 @@ public class Order {
     private String address;
     @Setter
     @Builder.Default
-    private String status="NEW";
+    private OrderStates status=OrderStates.NEW;
     @Builder.Default
     private LocalDateTime placementTimestamp=LocalDateTime.now();
 
