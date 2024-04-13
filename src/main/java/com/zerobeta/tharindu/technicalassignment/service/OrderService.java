@@ -40,8 +40,11 @@ public class OrderService {
             order.setStatus("CANCELLED");
             orderRepository.save(order);
             return "Order successfully canceled";
+
+        } else if (Objects.equals(order.getStatus(), "CANCELLED")) {
+            return "Unable to cancel the oder. Order canceled already";
         }else{
-            return "Order dispatched";
+            return "Unable to cancel the oder. Order dispatched already";
         }
     }
 
