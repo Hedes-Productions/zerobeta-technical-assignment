@@ -26,15 +26,16 @@ DROP TABLE IF EXISTS `orders`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
   `quantity` int DEFAULT NULL,
+  `status` tinyint DEFAULT NULL,
   `f_user_id` bigint DEFAULT NULL,
   `placement_timestamp` datetime(6) DEFAULT NULL,
   `order_id` binary(16) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `item_name` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   KEY `FK9h3qq0pugm80kc4ey6ssdjeqr` (`f_user_id`),
-  CONSTRAINT `FK9h3qq0pugm80kc4ey6ssdjeqr` FOREIGN KEY (`f_user_id`) REFERENCES `users` (`user_id`)
+  CONSTRAINT `FK9h3qq0pugm80kc4ey6ssdjeqr` FOREIGN KEY (`f_user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `orders_chk_1` CHECK ((`status` between 0 and 2))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,14 +55,6 @@ CREATE TABLE `users` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping events for database 'order_management_system'
---
-
---
--- Dumping routines for database 'order_management_system'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -72,4 +65,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-13  8:24:59
+-- Dump completed on 2024-04-14  1:20:45
