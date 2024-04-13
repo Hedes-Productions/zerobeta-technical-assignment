@@ -7,7 +7,10 @@ import com.zerobeta.tharindu.technicalassignment.model.User;
 import com.zerobeta.tharindu.technicalassignment.repository.OrderRepository;
 import com.zerobeta.tharindu.technicalassignment.repository.UserRepository;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +23,7 @@ import java.util.UUID;
 public class OrderService {
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
-    public UUID placeOrder(OrderPlacementRequest orderPlacementRequest, String email) throws UsernameNotFoundException{
+    public UUID placeOrder(@NonNull OrderPlacementRequest orderPlacementRequest, String email) throws UsernameNotFoundException{
         User user = userRepository.findByEmail(email).orElseThrow(()->new UsernameNotFoundException("Username not found " + email));
         Order order = Order.builder()
                 .item_name(orderPlacementRequest.getItemName())
@@ -34,7 +37,7 @@ public class OrderService {
         return order.getId();
     }
 
-    public String cancelOrder(OrderCancellationRequest orderCancellationRequest) throws NoSuchElementException{
+    public String cancelOrder(@NonNull OrderCancellationRequest orderCancellationRequest) throws NoSuchElementException{
         Order order = orderRepository.findById(orderCancellationRequest.getOrderId()).orElseThrow(()->new NoSuchElementException("Order not found"));
         if (Objects.equals(order.getStatus(), "NEW")){
             order.setStatus("CANCELLED");
@@ -48,4 +51,8 @@ public class OrderService {
         }
     }
 
+    public Page<Order> getHistory(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return orderRepository.findAll(pageRequest);
+    }
 }
