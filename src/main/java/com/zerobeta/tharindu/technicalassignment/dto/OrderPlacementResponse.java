@@ -9,4 +9,5 @@ import java.util.UUID;
 @Builder
 public class OrderPlacementResponse {
     private UUID orderId;
+    private String feedback;
 }

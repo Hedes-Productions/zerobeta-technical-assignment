@@ -9,4 +9,5 @@ import org.springframework.data.domain.Page;
 @Getter
 public class HistoryResponse {
     private Page<Order> history;
+    private String feedback;
 }

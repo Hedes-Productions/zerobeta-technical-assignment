@@ -7,4 +7,5 @@ import lombok.Getter;
 @Builder
 public class SignUpResponse {
     private String token;
+    private String feedback;
 }
