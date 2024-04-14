@@ -28,7 +28,7 @@ git clone https://github.com/Hedes-Productions/zerobeta-technical-assignment.git
 
 1. Navigate to the root directory of the project.
 
-2. Run the following command
+2. Run the following command.
 
 ```
 docker compose up -d
@@ -89,7 +89,7 @@ Once the application is running, you can access the following endpoints:
 }
 ```
 
-- ### history : http://localhost:8080/api/orders/history?page={page_number}&size={page_size} - GET
+- ### Get history : http://localhost:8080/api/orders/history?page={page_number}&size={page_size} - GET
 
   - Make sure to pass a `Bearer Token` (which got from signing up or signing) in the authorization header.
   - Make sure to replace {`page_number`} and {`page_size`} with the page number and the size of the page.
