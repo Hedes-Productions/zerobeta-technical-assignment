@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  api_service:
+    image: order_management_system_backend
+    container_name: order_management_system_backend
+    build: .
+    restart: always
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysqldb
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_PORT: 3306
+
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:8.0
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - '3310:3306'
+    environment:
+      MYSQL_DATABASE: order_management_system
+      MYSQL_ROOT_PASSWORD: toor
+
+volumes:
+  mysql_data:
+    driver: local
