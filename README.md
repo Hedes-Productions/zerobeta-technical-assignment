@@ -93,3 +93,13 @@ Once the application is running, you can access the following endpoints:
 
   - Make sure to pass a `Bearer Token` (which got from signing up or signing) in the authorization header.
   - Make sure to replace {`page_number`} and {`page_size`} with the page number and the size of the page.
+
+## Functionalities
+
+1. Client sign up.
+2. Client Sign in.
+3. Order placement.
+4. Order cancellation.
+5. Fetch order history with Pagination. API request should contain the page no and record size.
+6. Background job (which will run in each 30 seconds. `NOTE:` time can be changable) that update the state of the `NEW` orders to `DISPATCHED`.
+7. Secure the API with JWT (Except the signup and sign in APIs).
